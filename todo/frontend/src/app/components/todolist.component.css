@@ -1,0 +1,168 @@
+/* Container centralizado com largura máxima */
+.container {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+    background: #f8f5f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Título */
+
+  img {
+    height: 80px; 
+    vertical-align: middle; 
+    margin-right: 10px;
+  }
+
+  h1 {
+    text-align: start;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: #333;
+  }
+  
+  /* Formulário */
+  form .form-group label {
+    font-weight: 600;
+    color: #555;
+  }
+  
+  form input[type="text"] {
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1.5px solid #ccc;
+    transition: border-color 0.3s ease;
+  }
+  
+  form input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+  }
+  
+  form button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.45rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  form button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  #submitButton {
+    margin-top: 10px;
+
+  }
+  
+  
+  /* Tabela */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.7rem;
+  }
+  
+  thead tr th {
+    background-color: #007bff;
+    color: white;
+    padding: 0.8rem 1rem;
+    border-radius: 8px 8px 0 0;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  tbody tr {
+    background: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+  }
+  
+  tbody tr:hover {
+    transform: translateY(-3px);
+  }
+  
+  tbody tr td {
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+    text-align: center;
+  }
+  
+  .text-decoration-line-through {
+    color: #999;
+    text-decoration: line-through;
+  }
+  
+  /* Inputs checkbox */
+  input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+  }
+  
+  /* Botões */
+  button.btn-sm {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.9rem;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  button.btn-sm i {
+    pointer-events: none; /* Ícone não atrapalha clique no botão */
+    font-size: 1.1rem;
+  }
+  
+  /* Botões com cores */
+  .btn-success {
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0069d9;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  

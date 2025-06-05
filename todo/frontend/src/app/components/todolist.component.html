@@ -1,0 +1,104 @@
+<div class="container">
+    <h1>
+        <img src="assets/design-sem-nome.jpg" alt="Ícone">
+        Lista de Tarefas</h1>
+    <hr>
+    <form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+        <div class="form-group">
+            <label for="task">Tarefa</label>
+            <input
+              type="text"
+              class="form-control"
+              id="task"
+              placeholder="Descreva sua tarefa"
+              ngModel
+              name="task"
+              required
+              #taskInput="ngModel"
+            />
+            <!-- Mostrar erro só se o campo é inválido e foi tocado -->
+            <small
+              id="errorMessage"
+              class="form-text text-danger"
+              *ngIf="taskInput.invalid && (taskInput.touched || taskInput.dirty)"
+            >
+              Campo obrigatório
+            </small>
+        </div>
+
+        <button id="submitButton" type="submit" class="btn btn-primary">Adicionar</button>
+      </form>
+
+      <hr>
+
+    <table class="table">
+        <thead id="customDark">
+          <tr>
+            <th scope="col">Tarefa</th>
+            <th scope="col">Completas</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Apagar</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr
+              *ngFor="let t of tasks; let i = index"
+              [class.text-decoration-line-through]="t.done"
+            >
+              <td>
+                <div *ngIf="editIndex !== i; else editMode">{{ t.taskName }}</div>
+                <ng-template #editMode>
+                  <input [(ngModel)]="editTask" class="form-control" />
+                </ng-template>
+              </td>
+      
+              <td>
+                <input
+                  type="checkbox"
+                  class="form-check-input mt-0"
+                  [(ngModel)]="t.done"
+                  name="done{{ i }}"
+                />
+              </td>
+      
+              <td>
+                <button
+                  *ngIf="editIndex !== i"
+                  class="btn btn-success btn-sm"
+                  (click)="startEdit(i)"
+                  title="Editar tarefa"
+                >
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <div *ngIf="editIndex === i">
+                  <button
+                    class="btn btn-primary btn-sm me-1"
+                    (click)="saveEdit()"
+                    title="Salvar edição"
+                  >
+                    <i class="bi bi-check-lg"></i>
+                  </button>
+                  <button
+                    class="btn btn-secondary btn-sm"
+                    (click)="cancelEdit()"
+                    title="Cancelar edição"
+                  >
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+                </div>
+              </td>
+      
+              <td>
+                <button
+                  class="btn btn-danger btn-sm"
+                  (click)="removeTask(i)"
+                  title="Apagar tarefa"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+    </table>
+
+</div>

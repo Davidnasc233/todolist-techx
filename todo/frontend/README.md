@@ -1,27 +1,86 @@
-# Todo
+📋 TechX To-Do List
+Aplicativo de Lista de Tarefas com Angular no frontend, Node.js + TypeScript no backend e MySQL como
+banco de dados.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+ Pré-requisitos
 
-## Development server
+Tecnologia Versão recomendada
+Node.js 20.x
+npm 10.x
+Angular CLI 17.x
+MySQL 8.x
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+ Como rodar o projeto localmente
 
-## Code scaffolding
+1. Clone o repositório
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+git clone https://github.com/SEU_USUARIO/TechX-to-do-list.git
 
-## Build
+cd TechX-to-do-list
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Estrutura esperada:
+TechX-to-do-list/
+├── techx-api/ # Backend (Node.js + TypeScript)
+├── techx-frontend/ # Frontend (Angular)
+├── db/
+│ └── techx_dump.sql # Dump SQL do banco de dados
 
-## Running unit tests
+2. Configurar o banco de dados (MySQL)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2.1. Crie o banco de dados
 
-## Running end-to-end tests
+mysql -u root -p
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2.2. Crie o banco e as tabelas manualmente:
+CREATE DATABASE techx;
+USE techx;
 
-## Further help
+CREATE TABLE tasks (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  taskName VARCHAR(255) NOT NULL,
+  done BOOLEAN DEFAULT FALSE
+);
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+ou 
+
+2.2.1. Importe o arquivo SQL (dump)
+mysql -u root -p techx < db/techx_dump.sql
+
+3. Backend (Node.js + TypeScript)
+
+cd techx-api
+npm install
+3.1. Configure o banco de dados em src/config/database.ts
+const db = mysql2.createPool({
+host: 'localhost',
+user: 'root',
+password: 'SUA_SENHA',
+database: 'techx',
+});
+3.2. Inicie o servidor
+npm run dev
+O backend estará rodando em http://localhost:3000 .
+
+4. Frontend (Angular)
+
+cd ../techx-frontend
+npm install
+4.1. Verifique o endpoint da API em task.service.ts
+const API_URL = 'http://localhost:3000';
+
+4.2. Inicie o frontend
+ng serve
+A aplicação estará acessível em: http://localhost:4200
+ Testando
+ Adicionar tarefas
+ Marcar como feita
+ Editar tarefas
+ Apagar tarefas
+
+❗ Dicas
+
+Sempre inicie o backend antes do frontend
+Verifique o console do navegador em caso de erros
+Confirme que o CORS está habilitado no backend
+
+Feito com 💻 por TechX.

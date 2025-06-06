@@ -56,9 +56,9 @@
                 <input
                   type="checkbox"
                   class="form-check-input mt-0"
-                  [(ngModel)]="t.done"
-                  name="done{{ i }}"
-                />
+                  [checked]="t.done"
+                  (change)="toggleDone(i)"
+/>
               </td>
       
               <td>

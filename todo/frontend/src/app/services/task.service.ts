@@ -24,11 +24,11 @@ export class TaskService {
     return this.http.post<Task>(API_URL, task);
   }
 
-  deleteTask(id: number): Observable<void> {
+  removeTask(id: number): Observable<void> {
     return this.http.delete<void>(`${API_URL}/${id}`);
   }
 
-  updateTask(id: number, task: Partial<Task>): Observable<Task> {
+  startEdit(id: number, task: Partial<Task>): Observable<Task> {
     return this.http.put<Task>(`${API_URL}/${id}`, task);
   }
 }

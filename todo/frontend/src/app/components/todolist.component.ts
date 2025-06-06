@@ -62,11 +62,29 @@ export class TodolistComponent implements OnInit {
   }
   
   saveEdit() {
-    if (this.editIndex !== null && this.editTask.trim()) {
-      this.tasks[this.editIndex].taskName = this.editTask.trim();
-      this.cancelEdit();
+    if (this.editIndex !== -1 && this.editTask.trim()) {
+      const task = this.tasks[this.editIndex];
+      const updatedTask = {
+        ...task,
+        taskName: this.editTask.trim()
+      };
+  
+      this.taskService.startEdit(task.id, updatedTask).subscribe({
+        next: (response) => {
+          this.tasks[this.editIndex] = response; 
+          this.cancelEdit();
+        },
+        error: (err) => {
+          console.error('Erro ao salvar edição:', err);
+        }
+      });
+      if (this.editIndex !== null && this.editTask.trim()) {
+        this.tasks[this.editIndex].taskName = this.editTask.trim();
+        this.cancelEdit();
+      }
     }
   }
+
   
   cancelEdit() {
     this.editIndex = -1;
@@ -75,13 +93,34 @@ export class TodolistComponent implements OnInit {
   
 
   removeTask(index: number) {
+    const taskId = this.tasks[index].id;
     if (confirm(`Deseja apagar a tarefa "${this.tasks[index].taskName}"?`)) {
-      this.tasks.splice(index, 1);
+      this.taskService.removeTask(taskId).subscribe({
+        next: () => {
+          this.tasks.splice(index, 1); // Só remove localmente após sucesso no backend
+        },
+        error: (err) => {
+          console.error('Erro ao apagar tarefa:', err);
+        }
+      });
     }
   }
+  
 
   toggleDone(index: number) {
+    const task = this.tasks[index];
+    const updatedTask = { ...task, done: !task.done };
+  
+    this.taskService.startEdit(task.id, updatedTask).subscribe({
+      next: (updated) => {
+        this.tasks[index] = updated;
+      },
+      error: (err) => {
+        console.error('Erro ao marcar tarefa como completa:', err);
+      }
+    });
     this.tasks[index].done = !this.tasks[index].done;
   }
+  
 }
 
